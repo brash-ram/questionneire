@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hello-bot
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
