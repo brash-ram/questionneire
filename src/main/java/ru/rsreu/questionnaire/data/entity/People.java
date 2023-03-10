@@ -18,7 +18,7 @@ public class People {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @Column(name = "people_id", nullable = false)
     private Long id;
 
     private String name;
@@ -26,7 +26,7 @@ public class People {
     private Boolean isCome;
     private Boolean transport;
 
-    @ManyToMany
+    @OneToMany
     @Fetch(FetchMode.JOIN)
     private Set<Present> presents = new HashSet<>();
 

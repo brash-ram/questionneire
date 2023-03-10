@@ -8,3 +8,7 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: qwerty
+
+#  app:
+#    build: .
+

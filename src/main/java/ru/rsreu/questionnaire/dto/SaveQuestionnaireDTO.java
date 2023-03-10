@@ -9,7 +9,7 @@ public record SaveQuestionnaireDTO(
          String name,
          Boolean isCome,
          Boolean transport,
-         Set<Present> presents,
+         Set<Long> presents,
          List<String> satellites,
          List<String> alcohol
 ) {

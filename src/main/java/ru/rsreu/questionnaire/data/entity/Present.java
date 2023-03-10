@@ -12,9 +12,13 @@ public class Present {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @Column(name = "present_id", nullable = false)
     private Long id;
     private String name;
     private String url;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "people_id")
+    private People people;
 }
