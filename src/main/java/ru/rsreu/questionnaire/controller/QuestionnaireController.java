@@ -28,6 +28,11 @@ public class QuestionnaireController{
 
     @GetMapping("/save")
     public ResponseEntity<Object> saveQuestionnaire(@RequestBody SaveQuestionnaireDTO saveQuestionnaire) {
-        return null;
+        try {
+            peopleService.saveQuestionnaire(saveQuestionnaire);
+            return ResponseEntity.ok().body("Saved successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

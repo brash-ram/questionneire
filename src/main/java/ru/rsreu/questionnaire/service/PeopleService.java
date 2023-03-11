@@ -8,7 +8,9 @@ import ru.rsreu.questionnaire.data.jpa.PeopleRepository;
 import ru.rsreu.questionnaire.data.jpa.PresentRepository;
 import ru.rsreu.questionnaire.dto.DataForQuestionnaireDTO;
 import ru.rsreu.questionnaire.dto.PresentDTO;
+import ru.rsreu.questionnaire.dto.SaveQuestionnaireDTO;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,8 +35,20 @@ public class PeopleService {
                 presentList.stream().map(present -> new PresentDTO(
                         present.getId(),
                         present.getName(),
-                        present.getUrl(),
+                        present.getFile(),
                         present.getDescription())).collect(Collectors.toList())
         );
+    }
+
+    public void saveQuestionnaire(SaveQuestionnaireDTO dto) {
+        People people = new People()
+                .setId(dto.id())
+                .setName(dto.name())
+                .setIsCome(dto.isCome())
+                .setTransport(dto.transport())
+                .setPresents(new HashSet<>(presentRepository.findAllById(dto.presents())))
+                .setSatellites(dto.satellites())
+                .setAlcohol(dto.alcohol());
+        peopleRepository.save(people);
     }
 }

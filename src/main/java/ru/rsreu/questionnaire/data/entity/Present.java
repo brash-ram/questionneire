@@ -15,7 +15,7 @@ public class Present {
     @Column(name = "present_id", nullable = false)
     private Long id;
     private String name;
-    private String url;
+    private String file;
     private String description;
 
     @ManyToOne
