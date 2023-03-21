@@ -2,8 +2,6 @@ server:
   port: 8080
 
 spring:
-  application:
-    name: hello-bot
   jpa:
     properties:
       hibernate:
@@ -12,3 +10,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: qwerty
+    driver-class-name: org.postgresql.Driver

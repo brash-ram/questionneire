@@ -6,6 +6,7 @@ import ru.rsreu.questionnaire.data.entity.People;
 import ru.rsreu.questionnaire.data.entity.Present;
 import ru.rsreu.questionnaire.data.jpa.PeopleRepository;
 import ru.rsreu.questionnaire.data.jpa.PresentRepository;
+import ru.rsreu.questionnaire.dto.AllQuestionneiresDTO;
 import ru.rsreu.questionnaire.dto.DataForQuestionnaireDTO;
 import ru.rsreu.questionnaire.dto.PresentDTO;
 import ru.rsreu.questionnaire.dto.SaveQuestionnaireDTO;
@@ -50,5 +51,9 @@ public class PeopleService {
                 .setSatellites(dto.satellites())
                 .setAlcohol(dto.alcohol());
         peopleRepository.save(people);
+    }
+
+    public AllQuestionneiresDTO getAllData() {
+        return new AllQuestionneiresDTO(peopleRepository.findAll());
     }
 }
