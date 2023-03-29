@@ -6,10 +6,10 @@ import ru.rsreu.questionnaire.data.entity.People;
 import ru.rsreu.questionnaire.data.entity.Present;
 import ru.rsreu.questionnaire.data.jpa.PeopleRepository;
 import ru.rsreu.questionnaire.data.jpa.PresentRepository;
-import ru.rsreu.questionnaire.dto.AllQuestionneiresDTO;
-import ru.rsreu.questionnaire.dto.DataForQuestionnaireDTO;
-import ru.rsreu.questionnaire.dto.PresentDTO;
-import ru.rsreu.questionnaire.dto.SaveQuestionnaireDTO;
+import ru.rsreu.questionnaire.dto.AllQuestionneiresResponse;
+import ru.rsreu.questionnaire.dto.DataForQuestionnaireRequest;
+import ru.rsreu.questionnaire.dto.PresentResponse;
+import ru.rsreu.questionnaire.dto.SaveQuestionnaireRequest;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,14 +26,14 @@ public class PeopleService {
         return peopleRepository.save(new People().setName(name));
     }
 
-    public DataForQuestionnaireDTO getDataForNewQuestionnaire(Long id) {
+    public DataForQuestionnaireRequest getDataForNewQuestionnaire(Long id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
         People people = optionalPeople.orElseThrow();
         List<Present> presentList = presentRepository.findAllByPeopleIsNull();
-        return new DataForQuestionnaireDTO(
+        return new DataForQuestionnaireRequest(
                 people.getId(),
                 people.getName(),
-                presentList.stream().map(present -> new PresentDTO(
+                presentList.stream().map(present -> new PresentResponse(
                         present.getId(),
                         present.getName(),
                         present.getFile(),
@@ -41,7 +41,7 @@ public class PeopleService {
         );
     }
 
-    public void saveQuestionnaire(SaveQuestionnaireDTO dto) {
+    public void saveQuestionnaire(SaveQuestionnaireRequest dto) {
         People people = new People()
                 .setId(dto.id())
                 .setName(dto.name())
@@ -53,7 +53,7 @@ public class PeopleService {
         peopleRepository.save(people);
     }
 
-    public AllQuestionneiresDTO getAllData() {
-        return new AllQuestionneiresDTO(peopleRepository.findAll());
+    public AllQuestionneiresResponse getAllData() {
+        return new AllQuestionneiresResponse(peopleRepository.findAll());
     }
 }

@@ -4,7 +4,7 @@ import ru.rsreu.questionnaire.data.entity.People;
 
 import java.util.List;
 
-public record AllQuestionneiresDTO(
+public record AllQuestionneiresResponse(
         List<People> data
 ) {
 }

@@ -2,7 +2,7 @@ package ru.rsreu.questionnaire.dto;
 
 import java.util.Set;
 
-public record SaveQuestionnaireDTO(
+public record SaveQuestionnaireRequest(
          Long id,
          String name,
          Boolean isCome,

@@ -1,6 +1,6 @@
 package ru.rsreu.questionnaire.dto;
 
-public record PresentDTO(
+public record PresentResponse(
         Long id,
         String name,
         String file,
