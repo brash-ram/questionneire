@@ -1,6 +1,9 @@
 server:
   port: 8080
 
+frontend:
+  endpoint: ${FRONTEND}
+
 spring:
   jpa:
     properties:
