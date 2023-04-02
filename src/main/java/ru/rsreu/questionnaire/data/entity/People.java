@@ -24,7 +24,7 @@ public class People {
     private String name;
 
     private Boolean isCome;
-    private Boolean transport;
+    private String transport;
 
     @OneToMany
     @Fetch(FetchMode.JOIN)

@@ -4,9 +4,8 @@ import java.util.Set;
 
 public record SaveQuestionnaireRequest(
          Long id,
-         String name,
          Boolean isCome,
-         Boolean transport,
+         String transport,
          Set<Long> presents,
          Set<String> satellites,
          Set<String> alcohol

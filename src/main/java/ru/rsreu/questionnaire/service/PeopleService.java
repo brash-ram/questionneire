@@ -46,22 +46,24 @@ public class PeopleService {
     }
 
     public void saveQuestionnaire(SaveQuestionnaireRequest dto) {
-        People people = new People()
+        Optional<People> optionalPeople = peopleRepository.findById(dto.id());
+        People people = optionalPeople.orElseThrow();
+        peopleRepository.save(new People()
                 .setId(dto.id())
-                .setName(dto.name())
+                .setName(people.getName())
                 .setIsCome(dto.isCome())
                 .setTransport(dto.transport())
                 .setPresents(new HashSet<>(presentRepository.findAllById(dto.presents())))
                 .setSatellites(dto.satellites())
-                .setAlcohol(dto.alcohol());
-        peopleRepository.save(people);
+                .setAlcohol(dto.alcohol())
+        );
     }
 
     public void notCumMan(Long id) {
         People people = new People()
                 .setId(id)
                 .setName(null)
-                .setIsCome(null)
+                .setIsCome(false)
                 .setTransport(null)
                 .setPresents(null)
                 .setSatellites(null)
