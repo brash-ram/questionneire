@@ -12,14 +12,12 @@ public class CorsWebConfig implements WebMvcConfigurer {
 
     @Value("${frontend.endpoint}")
     private String url;
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
                 .allowedOrigins("/**",
                                 "/*",
-                                "*",
                                 url
                 )
                 .allowCredentials(true);
