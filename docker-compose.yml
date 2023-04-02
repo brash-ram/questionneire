@@ -25,7 +25,7 @@ services:
       - "8080:8080"
     environment:
       DB_URL: jdbc:postgresql://postgresql:5432/questionnaire
-      FRONTEND: http://localhost
+      FRONTEND: http://wedding-of-kiril-and-natalia.ru
 
   frontend:
     build: "./wedding-process"
