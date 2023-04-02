@@ -60,15 +60,17 @@ public class PeopleService {
     }
 
     public void notCumMan(Long id) {
-        People people = new People()
+        Optional<People> optionalPeople = peopleRepository.findById(id);
+        People people = optionalPeople.orElseThrow();
+        peopleRepository.save(new People()
                 .setId(id)
-                .setName(null)
+                .setName(people.getName())
                 .setIsCome(false)
                 .setTransport(null)
                 .setPresents(null)
                 .setSatellites(null)
-                .setAlcohol(null);
-        peopleRepository.save(people);
+                .setAlcohol(null)
+        );
     }
 
     public AllQuestionneiresResponse getAllData() {
