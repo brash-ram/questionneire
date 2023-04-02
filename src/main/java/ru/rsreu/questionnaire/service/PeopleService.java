@@ -6,10 +6,7 @@ import ru.rsreu.questionnaire.data.entity.People;
 import ru.rsreu.questionnaire.data.entity.Present;
 import ru.rsreu.questionnaire.data.jpa.PeopleRepository;
 import ru.rsreu.questionnaire.data.jpa.PresentRepository;
-import ru.rsreu.questionnaire.dto.AllQuestionneiresResponse;
-import ru.rsreu.questionnaire.dto.DataForQuestionnaireRequest;
-import ru.rsreu.questionnaire.dto.PresentResponse;
-import ru.rsreu.questionnaire.dto.SaveQuestionnaireRequest;
+import ru.rsreu.questionnaire.dto.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -26,12 +23,19 @@ public class PeopleService {
         return peopleRepository.save(new People().setName(name));
     }
 
-    public DataForQuestionnaireRequest getDataForNewQuestionnaire(Long id) {
+    public DataForCreateQuestionnaireRequest getIdForNewQuestionnaire(Long id) {
+        Optional<People> optionalPeople = peopleRepository.findById(id);
+        People people = optionalPeople.orElseThrow();
+        return new DataForCreateQuestionnaireRequest(
+                people.getId()
+        );
+    }
+
+    public DataForStartQuestionnaireResponse getDataForNewQuestionnaire(Long id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
         People people = optionalPeople.orElseThrow();
         List<Present> presentList = presentRepository.findAllByPeopleIsNull();
-        return new DataForQuestionnaireRequest(
-                people.getId(),
+        return new DataForStartQuestionnaireResponse(
                 people.getName(),
                 presentList.stream().map(present -> new PresentResponse(
                         present.getId(),

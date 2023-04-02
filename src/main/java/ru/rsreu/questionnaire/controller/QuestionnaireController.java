@@ -21,7 +21,13 @@ public class QuestionnaireController{
     @PostMapping("/create")
     public ResponseEntity<?> createQuestionnaire(@RequestBody CreateQuestionnaireRequest createQuestionnaire) {
         People people = peopleService.persistPeople(createQuestionnaire.name());
-        DataForQuestionnaireRequest data = peopleService.getDataForNewQuestionnaire(people.getId());
+        DataForCreateQuestionnaireRequest data = peopleService.getIdForNewQuestionnaire(people.getId());
+        return ResponseEntity.ok().body(data);
+    }
+
+    @PostMapping("/start")
+    public ResponseEntity<?> startQuestionnaire(@RequestBody StartQuestionnaireRequest startQuestionnaire) {
+        DataForStartQuestionnaireResponse data = peopleService.getDataForNewQuestionnaire(startQuestionnaire.id());
         return ResponseEntity.ok().body(data);
     }
 

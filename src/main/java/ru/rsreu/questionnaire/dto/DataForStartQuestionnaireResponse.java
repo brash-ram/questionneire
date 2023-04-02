@@ -2,8 +2,8 @@ package ru.rsreu.questionnaire.dto;
 
 import java.util.List;
 
-public record DataForQuestionnaireRequest(
-        Long id,
+public record DataForStartQuestionnaireResponse(
         String name,
         List<PresentResponse> presents
-){}
+) {
+}
