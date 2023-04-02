@@ -31,6 +31,13 @@ public class QuestionnaireController{
         return ResponseEntity.ok().body(data);
     }
 
+    @PostMapping("/notcum")
+    public ResponseEntity<?> NotCum(@RequestBody NotCumRequest notCumRequest) {
+        peopleService.notCumMan(notCumRequest.id());
+        return ResponseEntity.ok().body("Not cum successfully!");
+
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveQuestionnaire(@RequestBody SaveQuestionnaireRequest saveQuestionnaire) {
         peopleService.saveQuestionnaire(saveQuestionnaire);

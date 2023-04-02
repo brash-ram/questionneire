@@ -57,6 +57,18 @@ public class PeopleService {
         peopleRepository.save(people);
     }
 
+    public void notCumMan(Long id) {
+        People people = new People()
+                .setId(id)
+                .setName(null)
+                .setIsCome(null)
+                .setTransport(null)
+                .setPresents(null)
+                .setSatellites(null)
+                .setAlcohol(null);
+        peopleRepository.save(people);
+    }
+
     public AllQuestionneiresResponse getAllData() {
         return new AllQuestionneiresResponse(peopleRepository.findAll());
     }
