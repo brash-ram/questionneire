@@ -6,15 +6,20 @@ frontend:
 
 spring:
   jpa:
+    defer-datasource-initialization: true
     properties:
       hibernate:
         format_sql: true
     open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   datasource:
     url: ${DB_URL}
     username: postgres
     password: qwerty
     driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      encoding: utf-8
