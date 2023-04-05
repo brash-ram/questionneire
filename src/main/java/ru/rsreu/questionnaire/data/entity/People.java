@@ -26,9 +26,9 @@ public class People {
     private Boolean isCome;
     private String transport;
 
-    @OneToMany
-    @Fetch(FetchMode.JOIN)
-    private Set<Present> presents = new HashSet<>();
+    @ManyToOne()
+//    @Fetch(FetchMode.JOIN)
+    private Present presents;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> satellites = new HashSet<>();

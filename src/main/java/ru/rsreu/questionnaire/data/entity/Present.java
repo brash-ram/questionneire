@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.Set;
+
 @Entity
 @Data
 @Accessors(chain = true)
@@ -18,7 +20,7 @@ public class Present {
     private String file;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "people_id")
-    private People people;
+//    @OneToOne
+//    @JoinColumn(name = "people_id")
+    private Boolean people;
 }

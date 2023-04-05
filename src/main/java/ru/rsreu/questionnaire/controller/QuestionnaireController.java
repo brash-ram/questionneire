@@ -39,7 +39,7 @@ public class QuestionnaireController{
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveQuestionnaire(@RequestBody SaveQuestionnaireRequest saveQuestionnaire) {
+    public ResponseEntity<?> saveQuestionnaire(@RequestBody SaveQuestionnaireRequest saveQuestionnaire) throws Exception {
         peopleService.saveQuestionnaire(saveQuestionnaire);
         return ResponseEntity.ok().body("Saved successfully!");
 
@@ -53,6 +53,7 @@ public class QuestionnaireController{
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ApiErrorResponse> handleException(Exception ex, WebRequest request) {
+        ex.printStackTrace();
         return ResponseEntity.badRequest().body(new ApiErrorResponse(
                 request.getDescription(false),
                 HttpStatus.BAD_REQUEST.toString(),

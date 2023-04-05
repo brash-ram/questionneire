@@ -26,6 +26,8 @@ services:
     environment:
       DB_URL: jdbc:postgresql://postgresql:5432/questionnaire
       FRONTEND: http://wedding-of-kiril-and-natalia.ru
+      DDL_AUTO: update
+      INIT_MODE: always
 
   frontend:
     build: "./wedding-process"

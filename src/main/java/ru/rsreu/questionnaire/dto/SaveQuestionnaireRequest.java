@@ -6,7 +6,7 @@ public record SaveQuestionnaireRequest(
          Long id,
          Boolean isCome,
          String transport,
-         Set<Long> presents,
+         Long presents,
          Set<String> satellites,
          Set<String> alcohol
 ) {

@@ -8,9 +8,7 @@ import ru.rsreu.questionnaire.data.jpa.PeopleRepository;
 import ru.rsreu.questionnaire.data.jpa.PresentRepository;
 import ru.rsreu.questionnaire.dto.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +16,8 @@ import java.util.stream.Collectors;
 public class PeopleService {
     private final PeopleRepository peopleRepository;
     private final PresentRepository presentRepository;
+
+    private final Long ID_MONEY_PRESENT = 6L;
 
     public People persistPeople(String name) {
         return peopleRepository.save(new People().setName(name));
@@ -45,18 +45,29 @@ public class PeopleService {
         );
     }
 
-    public void saveQuestionnaire(SaveQuestionnaireRequest dto) {
+    public void saveQuestionnaire(SaveQuestionnaireRequest dto) throws Exception {
         Optional<People> optionalPeople = peopleRepository.findById(dto.id());
         People people = optionalPeople.orElseThrow();
-        peopleRepository.save(new People()
+        Present present = null;
+
+        if (dto.presents() != null) {
+            present = presentRepository.findById(dto.presents()).get();
+            if (present!= null && present.getPeople() != null) throw new Exception("Present already taken");
+        }
+
+        People savedPeople = peopleRepository.save(new People()
                 .setId(dto.id())
                 .setName(people.getName())
                 .setIsCome(dto.isCome())
                 .setTransport(dto.transport())
-                .setPresents(new HashSet<>(presentRepository.findAllById(dto.presents())))
+                .setPresents(present)
                 .setSatellites(dto.satellites())
                 .setAlcohol(dto.alcohol())
         );
+
+        if (present != null && !present.getName().equals("Деньги")) {
+            presentRepository.save(present.setPeople(true));
+        }
     }
 
     public void notCumMan(Long id) {
