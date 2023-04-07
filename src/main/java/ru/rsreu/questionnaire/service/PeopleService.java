@@ -65,7 +65,7 @@ public class PeopleService {
                 .setAlcohol(dto.alcohol())
         );
 
-        if (present != null && !present.getName().equals("Деньги")) {
+        if (present != null && !present.getName().equals("Вклад в семейный бюджет")) {
             presentRepository.save(present.setPeople(true));
         }
     }
