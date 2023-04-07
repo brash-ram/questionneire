@@ -15,8 +15,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ../2. Init Database:/docker-entrypoint-initdb.d
-      - ./data:/var/lib/postgresql/data
+      - ../questionnaire-data:/var/lib/postgresql/data
 
   backend:
     build: .
@@ -27,7 +26,7 @@ services:
       DB_URL: jdbc:postgresql://postgresql:5432/questionnaire
       FRONTEND: http://wedding-of-kiril-and-natalia.ru
       DDL_AUTO: update
-      INIT_MODE: always
+      INIT_MODE: never
 
   frontend:
     build: "./wedding-process"
