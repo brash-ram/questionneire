@@ -1,6 +1,9 @@
 # Use postgres/example user/password credentials
 version: '3.1'
 
+networks:
+  backend:
+
 services:
 
   postgresql:
@@ -12,10 +15,11 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "qwerty"
       PGDATA: "/var/lib/postgresql/data/pgdata"
-    ports:
-      - "5432:5432"
     volumes:
       - ../questionnaire-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
 
   backend:
     build: .
@@ -27,9 +31,12 @@ services:
       FRONTEND: http://wedding-of-kiril-and-natalia.ru
       DDL_AUTO: update
       INIT_MODE: never
+    restart: on-failure
+    networks:
+      - backend
 
-  frontend:
-    build: "./wedding-process"
-    container_name: frontend
-    ports:
-      - "80:80"
+#  frontend:
+#    build: "./wedding-process"
+#    container_name: frontend
+#    ports:
+#      - "80:80"
