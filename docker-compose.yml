@@ -35,8 +35,8 @@ services:
     networks:
       - backend
 
-#  frontend:
-#    build: "./wedding-process"
-#    container_name: frontend
-#    ports:
-#      - "80:80"
+  frontend:
+    build: "./wedding-process"
+    container_name: frontend
+    ports:
+      - "80:80"
